@@ -9,38 +9,36 @@
  * It is considered best practice for _index.tsx to not have nested child routes.
  * Instead, it should be used as a landing page for the root of the site.
  */
+import { Link } from "@remix-run/react";
+import { LinksFunction } from "@remix-run/node";
 
-import type { MetaFunction } from "@remix-run/node";
-import { Outlet, Link } from "@remix-run/react";
-import { useState } from "react";
-
-export const meta: MetaFunction = () => {
-  return [{ title: "New Remix App" }, { name: "description", content: "Welcome to Remix!" }];
-};
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: "/styles.css" },
+  { rel: "stylesheet", href: "/bulma.min.css" },
+];
 
 /**
  * The main index page component.
  */
 export default function Index() {
-  const [index, setIndex] = useState(0);
-
   return (
-    <>
-      <h2>Default Index File (_index.tsx)</h2>
+    <div className="container border-1">
+      <h1 className="title">Index Container</h1>
+      <p className="subtitle">
+        This page is rendered by the <code>app/routes/_index.tsx</code> file.
+      </p>
 
-      {/*
-       * Each Link (page) will be displayed in the root.tsx <Outlet /> componenent.
-       *
-       */}
-      <button>
-        <Link to="/page1">Main Page 1</Link>
-      </button>
-      <button>
-        <Link to="/page2">Main Page 2</Link>
-      </button>
-      <button>
-        <Link to="/page3">Main Page 3</Link>
-      </button>
-    </>
+      <div className="buttons">
+        <button className="button is-success">
+          <Link to="/page1">Main Page 1</Link>
+        </button>
+        <button className="button is-success">
+          <Link to="/page2">Main Page 2</Link>
+        </button>
+        <button className="button is-success">
+          <Link to="/page3">Main Page 3</Link>
+        </button>
+      </div>
+    </div>
   );
 }

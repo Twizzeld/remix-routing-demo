@@ -1,14 +1,17 @@
-import type { LoaderFunctionArgs } from "@remix-run/node";
-import { Outlet } from "@remix-run/react";
+import type { LinksFunction } from "@remix-run/node";
 
-export async function loader(args: LoaderFunctionArgs) {
-  return {};
-}
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: "/styles.css" },
+  { rel: "stylesheet", href: "/bulma.min.css" },
+];
 
 export default function SubPage1() {
   return (
-    <div>
-      <h2>SubPage 1 (page2.subpage1.tsx)</h2>
+    <div className="container border-1">
+      <h1 className="title">Sub Page 1</h1>
+      <p className="subtitle">
+        This page is rendered by the <code>app/routes/page2.subpage1.tsx</code> file.
+      </p>
     </div>
   );
 }

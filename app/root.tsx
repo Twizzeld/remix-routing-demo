@@ -11,25 +11,41 @@
  */
 
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from "@remix-run/react";
+import { LinksFunction, MetaFunction } from "@remix-run/node";
+
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: "/styles.css" },
+  { rel: "stylesheet", href: "/bulma.min.css" },
+];
+
+export const meta: MetaFunction = () => {
+  return [{ title: "Remix Demo" }, { name: "description", content: "A demo showing how nested routes work" }];
+};
 
 export default function App() {
   return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <h2>Global App Container (root.tsx)</h2>
+    <>
+      <html lang="en">
+        <head>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <Meta />
+          <Links />
+        </head>
+        <body>
+          <div className="container border-1">
+            <h1 className="title">Root Container</h1>
+            <p className="subtitle">
+              This is the root container. It is rendered by the <code>app/root.tsx</code> file.
+            </p>
+            <Outlet />
+          </div>
 
-        {/* Typically no additional content is add in this file. It's mostly used as scafolding. */}
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
-      </body>
-    </html>
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
+        </body>
+      </html>
+    </>
   );
 }
